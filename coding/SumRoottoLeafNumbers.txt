@@ -1,0 +1,22 @@
+void calculatesum(TreeNode* root,int &num,int &sum)
+{
+        
+        if(root==NULL) return;
+        if(root->left==NULL && root->right==NULL)
+        {
+            sum+=num*10 + (root->val);
+            return;
+
+        }
+        num=num*10 + root->val;
+        calculatesum(root->left,num,sum);
+        calculatesum(root->right,num,sum);
+
+        num=num/10;
+        
+}
+int sumNumbers(TreeNode* root) {
+        int sum=0,num=0;
+        calculatesum(root,num,sum);
+        return sum;    
+}

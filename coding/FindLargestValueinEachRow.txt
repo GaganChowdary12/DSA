@@ -1,0 +1,30 @@
+vector<int> largestValues(TreeNode* root) {
+        if(root==NULL ) return vector<int>{};
+
+        // Go level by level using queue
+        // Check max in each level
+        queue<TreeNode*> q;
+        vector<int>ans;
+        q.push(root);
+        while(!q.empty())
+        {
+            int currlength=q.size();
+            int levelmax=INT_MIN;
+            for(int i=0;i<currlength;i++)
+            {
+                TreeNode* node=q.front();
+                q.pop();
+                if(levelmax<node->val)
+                levelmax=node->val;
+
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+            ans.push_back(levelmax);
+        }
+
+        return ans;
+
+
+        
+    }
