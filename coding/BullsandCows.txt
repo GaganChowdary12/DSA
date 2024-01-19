@@ -1,0 +1,32 @@
+string getHint(string secret, string guess) {
+        int bulls=0;
+        int cows=0;
+        string ans;
+        map<int,int>m1;
+        map<int,int>m2;
+        for(int i=0;i<secret.size();i++)
+        {
+            if(secret[i]==guess[i])
+            bulls++; 
+            else
+            {
+                m1[secret[i]]++;
+                m2[guess[i]]++;
+            }
+            
+        }
+        ans+=to_string(bulls);
+        ans+='A';
+        for(auto it:m1)
+        {
+            if(m2.find(it.first)!=m2.end())
+            cows+=min(it.second,m2[it.first]);
+        }
+
+        ans+=to_string(cows);
+        ans+='B';
+       
+        
+        return ans;
+        
+    }
