@@ -1,0 +1,21 @@
+vector<int>ans;
+void subtrees(TreeNode* root)
+{
+    if(root) ans.push_back(root->val);
+    if(root->left) subtrees(root->left);
+    if(root->right) subtrees(root->right);
+        
+
+ }
+
+int getMinimumDifference(TreeNode* root) {
+    subtrees(root);
+    sort(ans.begin(),ans.end());
+    int mindiff=INT_MAX;
+    for(int i=0;i<ans.size()-1;i++)
+    {
+           if(mindiff>abs(ans[i]-ans[i+1]))
+           mindiff=abs(ans[i]-ans[i+1]);
+    }
+    return mindiff;
+}

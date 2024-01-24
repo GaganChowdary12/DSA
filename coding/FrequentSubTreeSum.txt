@@ -1,0 +1,37 @@
+unordered_map<int,int> count;
+    int subtreesum(TreeNode *root)
+    {
+        if(root->left==NULL && root->right==NULL)
+        {
+            if(count.find(root->val)==count.end())count[root->val]=1;
+            else count[root->val]++;
+            return root->val;
+        }
+        int leftsubtreeval=0,rightsubtreeval=0;
+        if(root->left) leftsubtreeval=subtreesum(root->left);
+        if(root->right) rightsubtreeval = subtreesum(root->right);
+        int subsum=leftsubtreeval+rightsubtreeval+root->val;
+        if(count.find(subsum)==count.end())count[subsum]=1;
+        else count[subsum]++;
+        return subsum;
+    }
+
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        subtreesum(root);
+        vector<int>ans;
+        int maxsum=INT_MIN;
+        for(auto it:count)
+        {
+            if(it.second>maxsum)
+            maxsum=it.second;
+        }
+        for(auto it:count)
+        {
+            if(it.second==maxsum)
+            ans.push_back(it.first);
+
+        }
+        return ans;
+
+        
+    }
