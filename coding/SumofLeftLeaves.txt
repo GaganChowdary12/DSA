@@ -1,0 +1,22 @@
+    int sum=0;
+    void leftpath(TreeNode* root)
+    {
+        if(root==NULL) return;
+        if(root->left!=NULL)
+        {
+            if(root->left->left==NULL && root->left->right==NULL)
+            sum+=root->left->val;
+            leftpath(root->left);
+        }
+        if (root->right!=NULL)
+        leftpath(root->right);
+        
+
+    }
+    int sumOfLeftLeaves(TreeNode* root) {
+        if(root!=NULL) leftpath(root);
+    
+        return sum;
+        
+        
+    }
